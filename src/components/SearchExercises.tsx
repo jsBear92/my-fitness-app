@@ -2,19 +2,10 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
+import { exercisesList, fitness } from "../types";
 
-type Exercise = {
-  name: string;
-  target: string;
-  equipment: string;
-  bodyPart: string;
-};
-
-
-
-const SearchExercises = () => {
+const SearchExercises: React.FC<fitness> = ({ setExercises, bodyPart, setBodyPart}) => {
   const [search, setSearch] = useState("");
-  const [exercises, setExercises] = useState([]);
   const [bodyParts, setBodyParts] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,6 +19,8 @@ const SearchExercises = () => {
     };
 
     fetchExercisesData();
+    console.log(bodyParts);
+    
   }, []);
 
   const handleSearch = async () => {
@@ -37,7 +30,7 @@ const SearchExercises = () => {
         exerciseOptions
       );
       const searchedExercises = exercisesData.filter(
-        (exercise: Exercise) =>
+        (exercise: exercisesList) =>
           exercise.name.toLowerCase().includes(search) ||
           exercise.target.toLowerCase().includes(search) ||
           exercise.equipment.toLowerCase().includes(search) ||
@@ -94,7 +87,7 @@ const SearchExercises = () => {
         </Button>
       </Box>
       <Box sx={{ position: "relative", width: "100%", p: '20px'}}>
-          <HorizontalScrollbar data={bodyParts} />
+          <HorizontalScrollbar data={bodyParts} bodyPart={bodyPart} setBodyPart={setBodyPart} />
       </Box>
     </Stack>
   );

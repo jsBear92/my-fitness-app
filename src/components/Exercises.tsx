@@ -1,6 +1,13 @@
 import React from 'react'
+import { bodyPartType, exerciseList } from '../types'
 
-const Exercises = () => {
+type ExercisesProps = {
+  setExercises: exerciseList[];
+  bodyPart: bodyPartType;
+  setBodyPart: bodyPartType;
+}
+
+const Exercises = ({ setExercises, bodyPart, setBodyPart }) => {
   return (
     <div>Exercises</div>
   )
