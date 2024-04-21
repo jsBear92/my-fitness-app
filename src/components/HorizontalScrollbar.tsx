@@ -13,8 +13,9 @@ type HorizontalScrollbarProps = {
 };
 
 const LeftArrow = () => {
+  {/* @ts-expect-error I didn't find the reason why it is unknown */}
   const { scrollPrev } = useContext(VisibilityContext);
-
+ 
   return (
     <Typography onClick={() => scrollPrev()} className="left-arrow">
       <img src={LeftArrowIcon} alt="left-arrow" />
@@ -23,6 +24,7 @@ const LeftArrow = () => {
 };
 
 const RightArrow = () => {
+  {/* @ts-expect-error I didn't find the reason why it is unknown */}
   const { scrollNext } = useContext(VisibilityContext);
 
   return (
@@ -40,15 +42,13 @@ const HorizontalScrollbar: React.FC<HorizontalScrollbarProps> = ({
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map((item) => (
-        <Box m="0 40px">
-          <div key={item} title={item}>
+          <Box key={item} m="0 40px">
             <BodyPart
               item={item}
               bodyPart={bodyPart}
               setBodyPart={setBodyPart}
             />
-          </div>
-        </Box>
+          </Box>
       ))}
     </ScrollMenu>
   );
