@@ -13,7 +13,6 @@ type HorizontalScrollbarProps = {
 };
 
 const LeftArrow = () => {
-  {/* @ts-expect-error I didn't find the reason why it is unknown */}
   const { scrollPrev } = useContext(VisibilityContext);
  
   return (
@@ -24,7 +23,6 @@ const LeftArrow = () => {
 };
 
 const RightArrow = () => {
-  {/* @ts-expect-error I didn't find the reason why it is unknown */}
   const { scrollNext } = useContext(VisibilityContext);
 
   return (

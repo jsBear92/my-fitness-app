@@ -23,7 +23,7 @@ const BodyPart: React.FC<BodyPartProps> = ({ item, bodyPart, setBodyPart }) => {
         width: "270px",
         height: "280px",
         cursor: "pointer",
-        gap: "47px",
+        gap: "42px",
       }}
       onClick={() => {
         setBodyPart(item);
