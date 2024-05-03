@@ -2,9 +2,23 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
-import { exercisesList, fitness } from "../types";
 
-const SearchExercises: React.FC<fitness> = ({ setExercises, bodyPart, setBodyPart}) => {
+interface SearchExercisesProps {
+  setExercises: React.Dispatch<React.SetStateAction<exercisesList[]>>;
+  bodyPart: string;
+  setBodyPart: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface exercisesList {
+  id: string;
+  name: string;
+  gifUrl: string;
+  target: string;
+  equipment: string;
+  bodyPart: string;
+}[]
+
+const SearchExercises: React.FC<SearchExercisesProps> = ({ setExercises, bodyPart, setBodyPart}) => {
   const [search, setSearch] = useState("");
   const [bodyParts, setBodyParts] = useState<string[]>([]);
 
@@ -19,14 +33,13 @@ const SearchExercises: React.FC<fitness> = ({ setExercises, bodyPart, setBodyPar
     };
 
     fetchExercisesData();
-    console.log(bodyParts);
     
   }, []);
 
   const handleSearch = async () => {
     if (search) {
       const exercisesData = await fetchData(
-        "https://exercisedb.p.rapidapi.com/exercises",
+        "https://exercisedb.p.rapidapi.com/exercises?limit=1000",
         exerciseOptions
       );
       const searchedExercises = exercisesData.filter(
@@ -36,9 +49,12 @@ const SearchExercises: React.FC<fitness> = ({ setExercises, bodyPart, setBodyPar
           exercise.equipment.toLowerCase().includes(search) ||
           exercise.bodyPart.toLowerCase().includes(search)
       );
+      
 
       setSearch("");
       setExercises(searchedExercises);
+      
+      
     }
   };
   return (

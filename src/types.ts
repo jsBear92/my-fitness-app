@@ -32,8 +32,8 @@ type bodyPartsList = {
 type fitness = {
   bodyPart: bodyPart;
   setBodyPart: React.Dispatch<React.SetStateAction<bodyPart>>;
-  exercises: exercisesList;
-  setExercises: React.Dispatch<React.SetStateAction<exercisesList>>;
+  exercises: exercisesList[];
+  setExercises: React.Dispatch<React.SetStateAction<exercisesList[]>>;
 }
 
 export type { bodyPart, exercisesList, bodyPartsList, fitness };
